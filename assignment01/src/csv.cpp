@@ -27,6 +27,8 @@
 
 #include "csv.h"
 
+#include <io.h>
+
 #include <algorithm>  // for remove_if()
 #include <iostream>
 #include <sstream>
@@ -74,7 +76,28 @@ namespace csi281 {
   // and the readCell() functions above
   // You'll also want to construct a CityYear from what you have read from the file
   CityYear readLine(ifstream &file) {
-    // YOUR CODE HERE
+
+    CityYear city_Year;
+
+    string line;
+    string junk;
+
+    getline(file, line);
+
+    istringstream iss(line);
+
+    junk = readStringCell(iss);
+    junk = readStringCell(iss);
+
+    city_Year.year = readIntCell(iss);
+    city_Year.numDaysBelow32 = readIntCell(iss);
+    city_Year.numDaysAbove90 = readIntCell(iss);
+    city_Year.averageTemperature = readFloatCell(iss);
+    city_Year.averageMax = readFloatCell(iss);
+    city_Year.averageMin = readFloatCell(iss);
+
+    return city_Year;
+
   }
 
   // Read city by looking at the specified lines in the CSV
@@ -87,5 +110,43 @@ namespace csi281 {
   // create an array of CityYear instances to pass to the CityTemperatureData constructor
   // when the CityTemperatureData is created, it will take ownership of the array
   CityTemperatureData* readCity(string cityName, string fileName, int startLine, int endLine) {
+
+    CityYear data_[endLine - startLine];
+
+    int count = 0;
+
+    string junk;
+
+    ifstream input;
+    input.open(fileName);
+
+    if (!input.good()) {
+
+      cout << "[Error] no input file or cant read input file. Aborting..." << endl;
+
+      abort();
+    }
+
+    for (int i = 0; i <= endLine; i++) {
+
+      if (i >= startLine) {
+
+        int j = 0;
+
+        data_[j] = readLine(input);
+
+        j++;
+
+      }
+      else {
+
+        getline(input, junk);
+
+      }
+
+    }
+
+    CityTemperatureData ctData(cityName, data_, count);
+
   }
 }  // namespace csi281
