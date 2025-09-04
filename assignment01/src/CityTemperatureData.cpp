@@ -44,9 +44,7 @@ namespace csi281 {
   // Find the right CityYear in the array and return it
   const CityYear CityTemperatureData::operator[](const int year) const {
 
-    int index = getFirstYear();
-
-    return _data[year - index];
+    return _data[year - getFirstYear()];
 
   }
 
@@ -55,13 +53,10 @@ namespace csi281 {
   float CityTemperatureData::getAllTimeAverage() const {
 
     float total = 0;
-    int index = getFirstYear();
 
     for (int i = 0; i < _count; i++) {
 
-      total += _data[index].averageTemperature;
-
-      index++;
+      total += _data[i].averageTemperature;
 
     }
 
@@ -75,13 +70,10 @@ namespace csi281 {
   int CityTemperatureData::getTotalDaysBelow32() const {
 
     int total = 0;
-    int index = getFirstYear();
 
     for (int i = 0; i < _count; i++) {
 
-      total += _data[index].numDaysBelow32;
-
-      index++;
+      total += _data[i].numDaysBelow32;
 
     }
 
@@ -93,13 +85,10 @@ namespace csi281 {
   int CityTemperatureData::getTotalDaysAbove90() const {
 
     int total = 0;
-    int index = getFirstYear();
 
     for (int i = 0; i < _count; i++) {
 
-      total += _data[index].numDaysAbove90;
-
-      index++;
+      total += _data[i].numDaysAbove90;
 
     }
 

@@ -111,7 +111,7 @@ namespace csi281 {
   // when the CityTemperatureData is created, it will take ownership of the array
   CityTemperatureData* readCity(string cityName, string fileName, int startLine, int endLine) {
 
-    CityYear data_[endLine - startLine];
+    CityYear * data_ = new CityYear[endLine - startLine + 1];
 
     int count = 0;
 
@@ -127,11 +127,11 @@ namespace csi281 {
       abort();
     }
 
+    int j = 0;
+
     for (int i = 0; i <= endLine; i++) {
 
       if (i >= startLine) {
-
-        int j = 0;
 
         data_[j] = readLine(input);
 
@@ -146,7 +146,12 @@ namespace csi281 {
 
     }
 
-    CityTemperatureData ctData(cityName, data_, count);
+    count = j;
+
+    CityTemperatureData *ctData  = new CityTemperatureData (cityName, data_, count);
+
+    return ctData;
 
   }
+
 }  // namespace csi281
