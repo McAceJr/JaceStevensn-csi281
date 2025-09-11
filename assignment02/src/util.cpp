@@ -41,7 +41,16 @@ namespace csi281 {
   // with numbers between *min* and *max*
   // Suggest using the facilities in STL <random>
   int *randomIntArray(const int length, const int min, const int max) {
-    // YOUR CODE HERE
+
+    auto *array = new int[length];
+
+    for (int i = 0; i < length; i++) {
+
+      array[i];
+
+    }
+
+    return array;
   }
 
   // Finds the speed of linear versus binary search

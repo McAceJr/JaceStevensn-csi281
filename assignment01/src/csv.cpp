@@ -26,9 +26,6 @@
 //  OTHER DEALINGS IN THE SOFTWARE.
 
 #include "csv.h"
-
-#include <io.h>
-
 #include <algorithm>  // for remove_if()
 #include <iostream>
 #include <sstream>
