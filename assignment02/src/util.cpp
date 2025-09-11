@@ -54,6 +54,10 @@ namespace csi281 {
 
     }
 
+    int *beggining = (array);
+    int *ending = (array + max);
+    sort(beggining, ending);
+
     return array;
   }
 
@@ -81,12 +85,18 @@ namespace csi281 {
     // Do numTests linear searches and find the average time
     // Put the result in a variable linearSearchSpeed
 
-    // YOUR CODE HERE
+    for (int test = 0; test < numTests; test++)
+    {
+
+    }
 
     // Do numTests binary searches and find the average time
     // Put the result in a variable binarySearchSpeed
 
-    // YOUR CODE HERE
+    for (int test = 0; test < numTests; test++)
+    {
+
+    }
 
     delete testArray;
     delete testKeys;
