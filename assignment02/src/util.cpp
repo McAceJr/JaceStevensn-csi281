@@ -44,9 +44,13 @@ namespace csi281 {
 
     auto *array = new int[length];
 
+    random_device dev;
+    mt19937 rang(dev());
+    uniform_int_distribution<mt19937::result_type> dist(min, max);
+
     for (int i = 0; i < length; i++) {
 
-      array[i];
+      array[i] = ;
 
     }
 
