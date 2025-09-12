@@ -1,0 +1,23 @@
+Jace Stevenson
+
+1 { O(n log n) }
+
+2 { O(n^2) }
+
+3 {
+    a = 10000
+    linear = 5a
+    binary = 10 * log2(a)
+    sort = 12alog(a)
+    (searches * linear)
+    (searches * binary) + sort
+    when searches = 10
+    10 * linear = 500000
+    (10 * binary) + sort = 481328.771238...
+    when searches = 9
+    9 * linear = 450000
+    (9 * binary) + sort = 481195.894114...
+    Therefore 10 is the amount of searches
+}
+
+4 { vector struct class }
