@@ -85,38 +85,34 @@ namespace csi281 {
     // Do numTests linear searches and find the average time
     // Put the result in a variable linearSearchSpeed
 
-    float totalTime = 0;
+    auto start = chrono::high_resolution_clock::now();
 
     for (int test = 0; test < numTests; test++)
     {
-      auto start = duration_cast<nanoseconds>(system_clock::now().time_since_epoch()).count();
 
       linearSearch(testArray, length, testKeys[test]);
 
-      auto end = duration_cast<nanoseconds>(system_clock::now().time_since_epoch()).count();
-
-      totalTime += end - start;
     }
 
-    float linearSearchSpeed = totalTime / numTests;
+    auto end = chrono::high_resolution_clock::now();
+
+    nanoseconds linearSearchSpeed = (nanoseconds)(end - start).count() / numTests;
 
     // Do numTests binary searches and find the average time
     // Put the result in a variable binarySearchSpeed
 
-    totalTime = 0;
+    start = chrono::high_resolution_clock::now();;
 
     for (int test = 0; test < numTests; test++)
     {
-      auto start = duration_cast<nanoseconds>(system_clock::now().time_since_epoch()).count();
 
       binarySearch(testArray, length, testKeys[test]);
 
-      auto end = duration_cast<nanoseconds>(system_clock::now().time_since_epoch()).count();
-
-      totalTime += end - start;
     }
 
-    float binarySearchSpeed = totalTime / numTests;
+    end = chrono::high_resolution_clock::now();;
+
+    nanoseconds binarySearchSpeed = (nanoseconds)(end - start).count() / numTests;
 
     delete testArray;
     delete testKeys;
