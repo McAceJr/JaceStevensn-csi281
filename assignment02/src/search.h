@@ -55,7 +55,7 @@ namespace csi281 {
 
     int region = length;
     bool found = false;
-
+    int attempts = 0;
     region /= 2;
 
     while (!found) {
@@ -72,6 +72,12 @@ namespace csi281 {
 
         region = region/2;
 
+      }
+
+      attempts++;
+
+      if (attempts > length) {
+        found = false;
       }
 
     }
