@@ -53,36 +53,62 @@ namespace csi281 {
   // or -1 if the key is never found; assumes a sorted array
   template <typename T> int binarySearch(T array[], const int length, const T key) {
 
-    int region = length;
-    bool found = false;
-    int attempts = 0;
-    region /= 2;
+    int lowEnd = 0;
+    int highEnd = length - 1;
 
-    while (!found) {
+    int count = log2(length) + 1;
+    while (lowEnd <= highEnd && count >= 0) {
 
-      if (array[region] == key) {
-        found = true;
+      int mid = lowEnd + (highEnd - lowEnd) / 2;
+
+      if (array[mid] == key) {
+        return mid;
       }
-      else if (array[region] > key) {
-
-        region = region + region/2;
-
+      else if (array[mid] < key) {
+        lowEnd = mid + 1;
       }
-      else if (array[region] < key) {
-
-        region = region/2;
-
+      else if (array[mid] > key) {
+        highEnd = mid - 1;
       }
 
-      attempts++;
-
-      if (attempts > length) {
-        found = false;
-      }
+      count--;
 
     }
 
     return -1;
+
+    // Old code that caused seg faults banished to the comment dimension
+
+    // int region = length;
+    // bool found = false;
+    // int attempts = 0;
+    // region /= 2;
+    //
+    // while (!found) {
+    //
+    //   if (array[region] == key) {
+    //     found = true;
+    //   }
+    //   else if (array[region] > key) {
+    //
+    //     region = region + region/2;
+    //
+    //   }
+    //   else if (array[region] < key) {
+    //
+    //     region = region/2;
+    //
+    //   }
+    //
+    //   attempts++;
+    //
+    //   if (attempts > length) {
+    //     return -1;
+    //   }
+    //
+    // }
+    //
+    // return region;
 
   }
 }  // namespace csi281

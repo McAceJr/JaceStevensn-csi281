@@ -55,7 +55,7 @@ namespace csi281 {
     }
 
     int *beggining = (array);
-    int *ending = (array + max);
+    int *ending = (array + length);
     sort(beggining, ending);
 
     return array;
