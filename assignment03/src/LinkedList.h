@@ -85,6 +85,7 @@ namespace csi281 {
       if (head == nullptr) {
         head = new Node(item);
         tail = head;
+        count++;
         return;
       }
       auto oldHead = head;
