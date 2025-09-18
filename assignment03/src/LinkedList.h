@@ -28,6 +28,7 @@
 #ifndef linkedlist_hpp
 #define linkedlist_hpp
 
+#include <assert.h>
 #include "Collection.h"
 #include "MemoryLeakDetector.h"
 
@@ -53,24 +54,56 @@ namespace csi281 {
     // Find the index of a particular item
     // Return -1 if it is not found
     int find(const T &item) {
-      // YOUR CODE HERE
+      Node *current = head;
+      for (int i = 0; i < count; i++) {
+
+        if (current->data == item) {
+          return i;
+        }
+
+        current = current->next;
+
+      }
+
+      return -1;
     }
 
     // Get the item at a particular index
     T &get(int index) {
       assert(index < count);  // can't insert off end
       assert(index >= 0);     // no negative indices
-                              // YOUR CODE HERE
+
+      Node *current = head;
+      for (int i = 0; i < index; i++) {
+        current = current->next;
+      }
+      return current->data;
     }
 
     // Insert at the beginning of the collection
     void insertAtBeginning(const T &item) {
-      // YOUR CODE HERE
+      if (head == nullptr) {
+        head = new Node(item);
+        tail = head;
+        return;
+      }
+      auto oldHead = head;
+      auto newNode = new Node(item);
+      newNode->next = oldHead;
+      head = newNode;
+      count++;
     }
 
     // Insert at the end of the collection
     void insertAtEnd(const T &item) {
-      // YOUR CODE HERE
+      if (tail == nullptr) {
+        insertAtBeginning(item);
+        return;
+      }
+      auto newNode = new Node(item);
+      tail->next = newNode;
+      tail = newNode;
+      count++;
     }
 
     // Insert at a specific index
@@ -102,13 +135,22 @@ namespace csi281 {
     // Remove the item at the beginning of the collection
     void removeAtBeginning() {
       assert(count > 0);
-      // YOUR CODE HERE
+      Node *current = head;
+      head = current->next;
+      delete current;
     }
 
     // Remove the item at the end of the collection
     void removeAtEnd() {
       assert(count > 0);
-      // YOUR CODE HERE
+      Node *current = head;
+      while (current->next->next != nullptr) {
+        current = current->next;
+      }
+      delete current->next;
+      current->next = nullptr;
+      count--;
+      tail = current;
     }
 
     // Remove the item at a specific index
