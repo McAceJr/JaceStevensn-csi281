@@ -140,6 +140,7 @@ namespace csi281 {
       assert(count > 0);
       Node *current = head;
       head = current->next;
+      count--;
       delete current;
     }
 
