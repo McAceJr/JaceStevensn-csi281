@@ -39,19 +39,91 @@ namespace csi281 {
   // Performs an in-place ascending sort of *array* of size *length*
   // using the bubble sort algorithm
   template <typename T> void bubbleSort(T array[], const int length) {
-    // YOUR CODE HERE
+
+    bool sorted = false;
+    int index = 0;
+    bool swapped = false;
+
+    while (!sorted) {
+
+      swapped = false;
+
+      if (array[index] > array[index + 1] && index > length - 1) {
+
+        swap(array[index], array[index + 1]);
+
+        swapped = true;
+
+      }
+
+      if (index > length - 1 && !swapped) {
+
+        sorted = true;
+
+      }
+
+      index++;
+
+      if (!swapped) {sorted = true;}
+
+    }
+
   }
 
   // Performs an in-place ascending sort of *array* of size *length*
   // using the selection sort algorithm
   template <typename T> void selectionSort(T array[], const int length) {
-    // YOUR CODE HERE
+
+    int lowest = 0;
+    int toswap = 0;
+    bool sorted = false;
+
+    while (!sorted) {
+
+      for (int i = toswap; i < length - 2; i++) {
+
+        if (array[i] < array[i + 1]) {
+          lowest = i;
+        }
+        else {
+          lowest = i+1;
+        }
+
+      }
+
+      swap(array[lowest], array[toswap]);
+      toswap++;
+
+      if (toswap == length - 1) {sorted = true;}
+
+    }
+
   }
 
   // Performs an in-place ascending sort of *array* of size *length*
   // using the insertion sort algorithm
   template <typename T> void insertionSort(T array[], const int length) {
-    // YOUR CODE HERE
+
+    bool sorted = false;
+    int sortPoint = 1;
+
+    for (int i = 1; i < length; i++) {
+
+      while (!sorted) {
+
+        if (array[i] < array[sortPoint]) {
+          swap(array[i], array[sortPoint + 1]);
+          sortPoint--;
+          if (sortPoint == 0) {sorted = true;}
+        }
+        else {
+          sorted = true;
+        }
+
+      }
+
+    }
+
   }
 }  // namespace csi281
 
