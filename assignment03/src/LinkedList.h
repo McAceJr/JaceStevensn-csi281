@@ -84,7 +84,9 @@ namespace csi281 {
     void insertAtBeginning(const T &item) {
       if (head == nullptr) {
         head = new Node(item);
-        tail = head;
+        if (tail == nullptr) {
+          tail = head;
+        }
         count++;
         return;
       }
@@ -97,7 +99,7 @@ namespace csi281 {
 
     // Insert at the end of the collection
     void insertAtEnd(const T &item) {
-      if (tail == nullptr) {
+      if (head == nullptr) {
         insertAtBeginning(item);
         return;
       }
@@ -111,11 +113,11 @@ namespace csi281 {
     void insert(const T &item, int index) {
       assert(index <= count);  // can't insert off end
       assert(index >= 0);      // no negative indices
-      if (index == 0) {
+      if (index <= 0) {
         insertAtBeginning(item);
         return;
       }
-      if (index == count) {
+      if (index >= count) {
         insertAtEnd(item);
         return;
       }
