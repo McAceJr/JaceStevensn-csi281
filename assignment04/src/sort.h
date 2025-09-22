@@ -40,6 +40,10 @@ namespace csi281 {
   // using the bubble sort algorithm
   template <typename T> void bubbleSort(T array[], const int length) {
 
+    if (length <=1) {
+      return;
+    }
+
     for (int i = 0; i < length; i++) {
       for (int j = 0; j < length - i - 1; j++) {
         if (array[j] > array[j + 1]) {
@@ -84,6 +88,10 @@ namespace csi281 {
   // using the selection sort algorithm
   template <typename T> void selectionSort(T array[], const int length) {
 
+    if (length <=1) {
+      return;
+    }
+
     int lowest = 0;
     int toswap = 0;
     bool sorted = false;
@@ -120,7 +128,7 @@ namespace csi281 {
 
     for (size_t sortedId = 1; sortedId < length; sortedId++) {
       for (size_t i = sortedId; i>0; i--) {
-        if (array[i-1], array[i]) {
+        if (array[i-1] < array[i]) {
           swap(array[i-1], array[i]);
         }
         else {
