@@ -114,6 +114,22 @@ namespace csi281 {
   // using the insertion sort algorithm
   template <typename T> void insertionSort(T array[], const int length) {
 
+    if (length <=1) {
+      return;
+    }
+
+    for (size_t sortedId = 1; sortedId < length; sortedId++) {
+      for (size_t i = sortedId; i>0; i--) {
+        if (array[i-1], array[i]) {
+          swap(array[i-1], array[i]);
+        }
+        else {
+          break;
+        }
+      }
+    }
+
+    /*
     bool sorted = false;
     int sortPoint = 1;
 
@@ -133,7 +149,7 @@ namespace csi281 {
       }
 
     }
-
+    */
   }
 }  // namespace csi281
 
