@@ -1,0 +1,28 @@
+Jace Stevenson
+1. Why is bubbleSort() slower than selectionSort() and insertionSort()?
+Please explain your answer (succinctly).
+
+BubbleSort uses lots of swaps compared to selectionSort and swaps take a lot of time. So selectionSort is much faster as
+it uses the least amount of swaps when bubbleSort uses roughly n^2 swaps usually.
+
+
+2. Why is an optimized insertionSort() faster than selectionSort()?
+Please explain your answer (succinctly).
+
+selectionSort may do fewer swaps but swaps take a lot of time, and by removing the swaps from insertionSort and instead just
+rewriting data it increases the speed at which insertionSort can sort arrays making it much faster than selectionSort
+
+
+3. What property does a custom class need to have for it to be usable in an array with the three sort methods you implemented?
+Give a name to the concept and also explain specifically in C++ what would need to be implemented.
+
+You would need to overload the operators > >= < <= so that they can be used by the sort functions while in the array.
+In the > >= < <= operator overload functions you would need to compare some part of the class so that it can return true or false.
+
+
+4. Why is std::sort so much faster than any of our implementations?
+Is it primarily because it is better optimized, or is it something more fundamental?
+
+std::sort as explained in class is a hybrid quick sort where it does quicksort down to groups of 10 and then after sorting the
+array into these groups it uses a simpler sort like selection or insertion sort to finish the process of sorting the array.
+I would say it is basically better optimized quicksort.
