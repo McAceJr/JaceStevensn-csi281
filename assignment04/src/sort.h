@@ -52,36 +52,6 @@ namespace csi281 {
       }
     }
 
-    /*
-    bool sorted = false;
-    int index = 0;
-    bool swapped = false;
-
-    while (!sorted) {
-
-      swapped = false;
-
-      if (array[index] > array[index + 1] && index > length - 1) {
-
-        swap(array[index], array[index + 1]);
-
-        swapped = true;
-
-      }
-
-      if (index > length - 1 && !swapped) {
-
-        sorted = true;
-
-      }
-
-      index++;
-
-      if (!swapped) {sorted = true;}
-
-    }
-    */
-
   }
 
   // Performs an in-place ascending sort of *array* of size *length*
@@ -92,29 +62,24 @@ namespace csi281 {
       return;
     }
 
-    int lowest = 0;
-    int toswap = 0;
-    bool sorted = false;
+    int minimumIndex;
 
-    while (!sorted) {
+    for (int i = 0; i < length - 1; i++) { //picks number to swap with lowest
+      minimumIndex = i;
+      for (int j = i + 1; j < length; j++) { // Goes through the array
 
-      for (int i = toswap; i < length - 2; i++) {
+        if (array[j] < array[minimumIndex]) { //checks if the current value is less...
+          //than the lowest found value
 
-        if (array[i] < array[i + 1]) {
-          lowest = i;
-        }
-        else {
-          lowest = i+1;
+          minimumIndex = j; // new lowest value's location in the array is set
+
         }
 
       }
-
-      swap(array[lowest], array[toswap]);
-      toswap++;
-
-      if (toswap == length - 1) {sorted = true;}
+      swap(array[i], array[minimumIndex]);
 
     }
+
 
   }
 
@@ -126,38 +91,19 @@ namespace csi281 {
       return;
     }
 
+    //I used the code you showed in class, but it's slower than selection sort.
+    //You said I could turn it in with a note stating what I used here.
+
     for (size_t sortedId = 1; sortedId < length; sortedId++) {
-      for (size_t i = sortedId; i>0; i--) {
-        if (array[i-1] < array[i]) {
-          swap(array[i-1], array[i]);
-        }
-        else {
-          break;
-        }
+      T temp = array[sortedId];
+      int currentId = sortedId - 1;
+      while (currentId >= 0 && array[currentId] > temp) {
+        array[currentId + 1] = array[currentId];
+        currentId--;
       }
+      array[currentId + 1] = temp;
     }
 
-    /*
-    bool sorted = false;
-    int sortPoint = 1;
-
-    for (int i = 1; i < length; i++) {
-
-      while (!sorted) {
-
-        if (array[i] < array[sortPoint]) {
-          swap(array[i], array[sortPoint + 1]);
-          sortPoint--;
-          if (sortPoint == 0) {sorted = true;}
-        }
-        else {
-          sorted = true;
-        }
-
-      }
-
-    }
-    */
   }
 }  // namespace csi281
 
