@@ -166,8 +166,9 @@ namespace csi281 {
     if (end - mid+1 > 10) { hybridSort(array, mid+1, end); }
     else {insertionSort(array, mid+1, end); }
 
-    std::inplace_merge(array+start, array+mid+1, array+end+1);
-
+    if (mid - start > 10 || end - mid+1 > 10) {
+      std::inplace_merge(array+start, array+mid+1, array+end+1);
+    }
 
   }
 
