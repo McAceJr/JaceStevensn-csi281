@@ -155,20 +155,18 @@ namespace csi281 {
   // should be able to call the insertionSort above
   template <typename T> void hybridSort(T array[], const int start, const int end) {
 
-    if (start >= end) {
-      return;
-    }
+    if (end - start >= 10) {
 
-    int mid = start + (end - start) / 2;
+      int mid = start + (end - start) / 2;
 
-    if (mid - start > 10) { hybridSort(array, start, mid); }
-    else {insertionSort(array, start, mid); }
-    if (end - mid+1 > 10) { hybridSort(array, mid+1, end); }
-    else {insertionSort(array, mid+1, end); }
+      mergeSort(array, start, mid);
+      mergeSort(array, mid+1, end);
 
-    if (mid - start > 10 || end - mid+1 > 10) {
       std::inplace_merge(array+start, array+mid+1, array+end+1);
+
     }
+
+    insertionSort(array, start, end);
 
   }
 
