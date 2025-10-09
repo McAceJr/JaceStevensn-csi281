@@ -65,7 +65,9 @@ namespace csi281 {
     // location in the backing store, so you're modifying
     // the original and not a copy
     void put(const K key, const V value) {
-      // YOUR CODE HERE
+
+
+
     }
 
     // Get the item associated with a particular key
@@ -78,7 +80,9 @@ namespace csi281 {
     // location in the backing store, so you're modifying
     // the original and not a copy
     optional<V> get(const K &key) {
-      // YOUR CODE HERE
+
+
+
     }
 
     // Remove a key and any associated value from the hash table
@@ -88,7 +92,9 @@ namespace csi281 {
     // location in the backing store, so you're modifying
     // the original and not a copy
     void remove(const K &key) {
-      // YOUR CODE HERE
+
+
+
     }
 
     // Calculate and return the load factor
@@ -122,7 +128,17 @@ namespace csi281 {
     // new backing store of size cap, or create
     // the backingStore for the first time
     void resize(int cap) {
-      // YOUR CODE HERE
+
+      list<pair<K,V>> *newBackingStore = new list<pair<K, V>>[cap];
+
+
+
+
+
+
+
+      capacity = cap*2;
+
     }
 
     // hash anything into an integer appropriate for
