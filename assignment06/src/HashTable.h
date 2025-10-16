@@ -66,7 +66,16 @@ namespace csi281 {
     // the original and not a copy
     void put(const K key, const V value) {
 
+      if (count >= capacity*0.75f) {
+        resize(capacity*2);
+      }
+      if (backingStore == nullptr) {
 
+      }
+
+      int loc = hashKey(key);
+
+      backingStore[loc] = pair<K, V>(key, value);
 
     }
 
@@ -81,7 +90,13 @@ namespace csi281 {
     // the original and not a copy
     optional<V> get(const K &key) {
 
+      if (backingStore == nullptr) {
+        return nullopt;
+      }
 
+      int loc = hashKey(key);
+
+      return optional <V>(backingStore[loc].second);
 
     }
 
@@ -93,7 +108,14 @@ namespace csi281 {
     // the original and not a copy
     void remove(const K &key) {
 
+      if (backingStore == nullptr) {
+        cout << "Empty Hash Table" << endl;
+        return;
+      }
 
+      int loc = hashKey(key);
+
+      remove_if(backingStore[loc].first, backingStore[loc].second);
 
     }
 
@@ -131,13 +153,11 @@ namespace csi281 {
 
       list<pair<K,V>> *newBackingStore = new list<pair<K, V>>[cap];
 
+      for (int i = 0; i < count; i++) {
+        newBackingStore[i] = backingStore[i];
+      }
 
-
-
-
-
-
-      capacity = cap*2;
+      capacity = cap;
 
     }
 
