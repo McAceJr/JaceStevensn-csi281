@@ -75,7 +75,24 @@ namespace csi281 {
 
       int loc = hashKey(key);
 
-      backingStore[loc] = pair<K, V>(key, value);
+      auto &data = backingStore[loc];
+
+      bool found = false;
+
+      for (auto &keyPair : data) {
+
+        if (keyPair.first == key) {
+
+          found = true;
+          keyPair.second = data;
+
+        }
+
+      }
+
+      if (!found) {
+        data->emplace_back();
+      }
 
     }
 
@@ -96,7 +113,7 @@ namespace csi281 {
 
       int loc = hashKey(key);
 
-      return optional <V>(backingStore[loc].second);
+      return optional <V>(backingStore[loc]->second);
 
     }
 
@@ -115,7 +132,7 @@ namespace csi281 {
 
       int loc = hashKey(key);
 
-      remove_if(backingStore[loc].first, backingStore[loc].second);
+      remove_if(backingStore[loc]->first, backingStore[loc]->second);
 
     }
 
