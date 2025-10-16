@@ -91,7 +91,7 @@ namespace csi281 {
       }
 
       if (!found) {
-        data->emplace_back();
+        data->emplace_back(pair <K, V>(key, value));
       }
 
     }
