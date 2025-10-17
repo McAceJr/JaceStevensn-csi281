@@ -66,13 +66,6 @@ namespace csi281 {
     // the original and not a copy
     void put(const K key, const V value) {
 
-      if (count >= capacity*0.75f) {
-        resize(capacity*2);
-      }
-      if (backingStore == nullptr) {
-
-      }
-
       int loc = hashKey(key);
 
       auto &data = backingStore[loc];
@@ -84,14 +77,21 @@ namespace csi281 {
         if (keyPair.first == key) {
 
           found = true;
-          keyPair.second = data;
-
+          keyPair.second = value;
+          break;
         }
 
       }
 
       if (!found) {
-        data->emplace_back(pair <K, V>(key, value));
+        data.emplace_back(pair <K, V>(key, value));
+        count++;
+      }
+
+      float capFactor = capacity*0.70f;
+
+      if (count >= capFactor) {
+        resize(capacity*2);
       }
 
     }
@@ -113,7 +113,17 @@ namespace csi281 {
 
       int loc = hashKey(key);
 
-      return optional <V>(backingStore[loc]->second);
+      auto &data = backingStore[loc];
+
+      for (auto &keyPair : data) {
+        if (keyPair.first == key) {
+
+          return optional<V>(keyPair.second);
+
+        }
+      }
+
+      return nullopt;
 
     }
 
@@ -126,13 +136,33 @@ namespace csi281 {
     void remove(const K &key) {
 
       if (backingStore == nullptr) {
-        cout << "Empty Hash Table" << endl;
+        cout << "Empty Hash Table Cannot Remove" << endl;
         return;
       }
 
       int loc = hashKey(key);
 
-      remove_if(backingStore[loc]->first, backingStore[loc]->second);
+      auto &data = backingStore[loc];
+
+      bool found = false;
+
+      for (auto &Keypair : data) {
+
+        if (Keypair.first == key) {
+
+          data.remove(Keypair);
+          found = true;
+          count--;
+          break;
+        }
+
+      }
+
+      if (!found) {
+
+        cout << "Key Not Found" << endl;
+
+      }
 
     }
 
@@ -168,20 +198,39 @@ namespace csi281 {
     // the backingStore for the first time
     void resize(int cap) {
 
-      list<pair<K,V>> *newBackingStore = new list<pair<K, V>>[cap];
+      list<pair<K,V>> *newBackingStore = new list<pair<K,V>>[cap];
 
-      for (int i = 0; i < count; i++) {
-        newBackingStore[i] = backingStore[i];
+      if (backingStore == nullptr) {
+
+        backingStore = newBackingStore;
+
+        capacity = cap;
+
+        return;
       }
 
-      capacity = cap;
+        for (int i = 0; i < capacity; i++) {
+          for (auto pair : backingStore[i]) {
+
+            int loc = key_hash(pair.first) % cap;
+
+            newBackingStore[loc].push_back(pair);
+
+          }
+        }
+
+        delete[] backingStore;
+
+        backingStore = newBackingStore;
+
+        capacity = cap;
 
     }
 
     // hash anything into an integer appropriate for
     // the current capacity
     // TIP: use the std::hash key_hash defined as a private variable
-    size_t hashKey(const K &key) { return key_hash(key); }
+    size_t hashKey(const K &key) { return key_hash(key) % capacity; }
   };
 
 }  // namespace csi281
