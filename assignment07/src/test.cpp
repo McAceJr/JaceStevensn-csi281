@@ -47,6 +47,34 @@ TEST_CASE("Queue Tests", "[queue]") {
     // work properly in concert with getCount()
     // and remove()
     // YOUR CODE HERE
+
+    CHECK(q1.getCount() == 0);
+
+    for (int i = 0; i < 10; i++) {
+      q1.push(i);
+    }
+
+    CHECK(q1.getCount() == 10);
+
+    CHECK(q1.peek() == 0);
+    q1.pop();
+    CHECK(q1.peek() == 1);
+    q1.pop();
+    CHECK(q1.peek() == 2);
+
+    for (int i = 5; i < 10; i++) {
+      q1.remove(i);
+    }
+
+    CHECK(q1.getCount() == 3);
+
+    CHECK(q1.peek() == 2);
+
+    q1.pop();
+    CHECK(q1.peek() == 3);
+
+
+
   }
 
   SECTION("Queue w/ string tests") {
@@ -55,6 +83,44 @@ TEST_CASE("Queue Tests", "[queue]") {
     // work properly in concert with getCount()
     // and remove()
     // YOUR CODE HERE
+
+    CHECK(q2.getCount() == 0);
+
+    string Words[10] = {
+      "hello",
+      "goodbye",
+      "???",
+      "test",
+      "111",
+      "12345",
+      "jace",
+      "jupiter",
+      "earth",
+      "(0.0)"
+    };
+
+    for (int i = 0; i < 10; i++) {
+      q2.push(Words[i]);
+    }
+
+    CHECK(q2.getCount() == 10);
+
+    CHECK(q2.peek() == Words[0]);
+    q2.pop();
+    CHECK(q2.peek() == Words[1]);
+    q2.pop();
+    CHECK(q2.peek() == Words[2]);
+
+    for (int i = 5; i < 10; i++) {
+      q2.remove(Words[i]);
+    }
+
+    CHECK(q2.getCount() == 3);
+
+    CHECK(q2.peek() == Words[2]);
+    q2.pop();
+    CHECK(q2.peek() == Words[3]);
+
   }
 }
 
@@ -65,6 +131,31 @@ TEST_CASE("Stack Tests", "[stack]") {
     // work properly in concert with getCount()
     // and remove()
     // YOUR CODE HERE
+
+    CHECK(s1.getCount() == 0);
+
+    for (int i = 0; i < 10; i++) {
+      s1.push(i);
+    }
+
+    CHECK(s1.getCount() == 10);
+
+    CHECK(s1.peek() == 9);
+    s1.pop();
+    CHECK(s1.peek() == 8);
+    s1.pop();
+    CHECK(s1.peek() == 7);
+
+    for (int i = 0; i < 5; i++) {
+      s1.remove(i);
+    }
+
+    CHECK(s1.getCount() == 3);
+
+    CHECK(s1.peek() == 7);
+    s1.pop();
+    CHECK(s1.peek() == 6);
+
   }
 
   SECTION("Stack w/ string tests") {
@@ -73,5 +164,43 @@ TEST_CASE("Stack Tests", "[stack]") {
     // work properly in concert with getCount()
     // and remove()
     // YOUR CODE HERE
+
+    CHECK(s2.getCount() == 0);
+
+    string Words[10] = {
+      "hello",
+      "goodbye",
+      "???",
+      "test",
+      "111",
+      "12345",
+      "jace",
+      "jupiter",
+      "earth",
+      "(0.0)"
+    };
+
+    for (int i = 0; i < 10; i++) {
+      s2.push(Words[i]);
+    }
+
+    CHECK(s2.getCount() == 10);
+
+    CHECK(s2.peek() == Words[9]);
+    s2.pop();
+    CHECK(s2.peek() == Words[8]);
+    s2.pop();
+    CHECK(s2.peek() == Words[7]);
+
+    for (int i = 0; i < 5; i++) {
+      s2.remove(Words[i]);
+    }
+
+    CHECK(s2.getCount() == 3);
+
+    CHECK(s2.peek() == Words[7]);
+    s2.pop();
+    CHECK(s2.peek() == Words[6]);
+
   }
 }

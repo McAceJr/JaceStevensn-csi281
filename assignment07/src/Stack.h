@@ -36,7 +36,12 @@ using namespace std;
 namespace csi281 {
   template <typename T> class Stack : public SequentialCollection<T> {
   public:
-    // YOUR CODE HERE
+    void push(const T &item) {backingStore.push_front(item);}
+    T pop() {
+      backingStore.pop_front();
+      return backingStore.front();
+    }
+    T &peek() {return backingStore.front();}
   protected:
     using SequentialCollection<T>::backingStore;
   };
