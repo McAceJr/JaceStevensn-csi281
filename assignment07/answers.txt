@@ -11,7 +11,7 @@ A group of orders at a restaurant.
 
 A parking lot's floors
 A container of cups stacked ontop of each other
-A stack of paperwork
+A stack of paperwork that you need to do in one sitting
 
 3. If a piece of software passes all of its unit tests does it necessarily work correctly? Why or why not?
 
