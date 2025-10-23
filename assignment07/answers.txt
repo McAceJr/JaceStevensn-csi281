@@ -1,5 +1,4 @@
-Please write your answers in a file called "answers.txt" with your names
-at the top in this repository. Please number each answer.
+Jace Stevenson
 
 1. List 3 examples of a real world queue.
 
