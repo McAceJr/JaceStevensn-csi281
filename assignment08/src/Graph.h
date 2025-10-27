@@ -74,7 +74,7 @@ namespace csi281 {
     // Determines whether there is an edge between *from* and *to*
     // if either is not in the graph, return false
     bool edgeExists(const V &from, const V &to) {
-      // YOUR CODE HERE
+
     }
 
     using Path = list<V>;
@@ -105,6 +105,37 @@ namespace csi281 {
       // YOUR CODE HERE
       // TIP: Start by defining a frontier and putting start onto it.
       // TIP: Follow the pseudocode from the slides from class
+
+      stack<V> frontier;
+      frontier.push(start);
+      while (!frontier.empty()) {
+        V current = frontier.top();
+        frontier.pop();
+
+        auto neighbors = this->neighbors(current);
+
+        for (auto neighbor : neighbors) {
+
+          if (explored.contains(neighbor)) {
+            continue;
+          }
+
+          if (neighbor == goal) {
+            explored[current] = neighbor;
+            return pathMapToPath(explored, neighbor);
+          }
+
+          else {
+            frontier.push(neighbor);
+            explored[neighbor] = current;
+          }
+
+        }
+
+      }
+
+      return nullopt;
+
     }
 
     // Perform a breadth-first search from *start*, looking for *goal*
@@ -120,6 +151,32 @@ namespace csi281 {
       // TIP: Start by defining a frontier and putting start onto it.
       // TIP: Follow the pseudocode from the slides from class
       // TIP: This should be very similar to dfs
+
+      queue<V> frontier;
+      frontier.push(start);
+
+      while (!frontier.empty()) {
+
+        V const &current = frontier.front();
+        frontier.pop();
+
+        if (current == goal) {
+          return pathMapToPath(explored, goal);
+        }
+
+        for (auto neighbor : neighbors(current)) {
+
+          if (explored.find(neighbor) == explored.end()) {
+
+            explored[neighbor] = current;
+            frontier.push(neighbor);
+
+          }
+        }
+      }
+
+      return nullopt;
+
     }
 
     // Utility function if you need it
