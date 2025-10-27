@@ -38,6 +38,7 @@
 #include <unordered_set>
 
 #include "MemoryLeakDetector.h"
+#include "assert.h"
 
 using namespace std;
 
@@ -75,6 +76,18 @@ namespace csi281 {
     // if either is not in the graph, return false
     bool edgeExists(const V &from, const V &to) {
 
+      if (adjacencyList.find(from) == adjacencyList.end())
+        return false;
+      if (adjacencyList.find(to) == adjacencyList.end())
+        return false;
+
+      if (neighbors(from).contains(to))
+        return true;
+      if (neighbors(to).contains(from))
+        return true;
+
+      return false;
+
     }
 
     using Path = list<V>;
@@ -108,7 +121,7 @@ namespace csi281 {
 
       explored.emplace(start, goal);
 
-      for (const auto &neighbor : start) {
+      for (const auto &neighbor : neighbors(start)) {
         if (!explored.contains(neighbor)) {
 
           dfs(neighbor, goal);
@@ -146,7 +159,7 @@ namespace csi281 {
 
         explored.emplace(current, current);
 
-        for (const auto &neighbor : current) {
+        for (const auto& neighbor : neighbors(current)) {
           if (!explored.contains(neighbor)) {
             frontier.emplace(neighbor, current);
           }
