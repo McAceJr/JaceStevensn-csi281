@@ -1,7 +1,7 @@
 Jace Stevenson
 
 1. What is faster to find an answer given the same graph, same start node, and same goal node: breadth-first search, depth-first search, or "it depends"? Explain why.
-BFS as it explores outward away from the start to try and find the end node.
+Most of the time BFS but if the goal is really far from the start down 1 path then DFS has a slightly faster time.
 
 2. What is the worst case (Big-O) runtime of breadth-first search? Explain why.
 It's normally notated as O(V+E) v is the number of vertexes and e is the number of edges.

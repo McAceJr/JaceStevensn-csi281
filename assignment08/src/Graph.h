@@ -119,15 +119,28 @@ namespace csi281 {
       // TIP: Start by defining a frontier and putting start onto it.
       // TIP: Follow the pseudocode from the slides from class
 
-      explored.emplace(start, goal);
+      stack<V> frontier;
+      frontier.push(start);
 
-      for (const auto &neighbor : neighbors(start)) {
-        if (!explored.contains(neighbor)) {
+      while (!frontier.empty()) {
+        V current = frontier.top();
+        frontier.pop();
 
-          dfs(neighbor, goal);
+        if (current == goal) {
+          return pathMapToPath(explored, current);
+        }
+
+        for (auto neighbors : neighbors(current)) {
+
+          if (!explored.contains(neighbors)) {
+            explored[neighbors] = current;
+            frontier.push(neighbors);
+          }
 
         }
       }
+
+      return nullopt;
 
     }
 
@@ -146,23 +159,23 @@ namespace csi281 {
       // TIP: This should be very similar to dfs
 
       queue<V> frontier;
-      frontier.emplace(start, goal);
+      frontier.push(start);
 
       while (!frontier.empty()) {
-
         V current = frontier.front();
         frontier.pop();
 
-        if (explored.contains(current)) {
-          continue;
+        if (current == goal) {
+          return pathMapToPath(explored, current);
         }
 
-        explored.emplace(current, current);
+        for (auto neighbors : neighbors(current)) {
 
-        for (const auto& neighbor : neighbors(current)) {
-          if (!explored.contains(neighbor)) {
-            frontier.emplace(neighbor, current);
+          if (!explored.contains(neighbors)) {
+            explored[neighbors] = current;
+            frontier.push(neighbors);
           }
+
         }
       }
 
