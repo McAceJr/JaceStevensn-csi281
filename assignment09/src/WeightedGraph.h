@@ -126,6 +126,32 @@ namespace csi281 {
           = priority_queue<pair<W, V>, vector<pair<W, V>>, greater<pair<W, V>>>();
       frontier.push(make_pair(0, start));
 
+      while (!frontier.empty()) {
+
+        auto [currentWeight, currentID] = frontier.top();
+
+        frontier.pop();
+
+        auto current = &parents[currentID];
+
+        for (const auto &[neighborID, neighborWeight] : adjacencyList[currentID]) {
+
+          double newWeight = weights[currentID] + neighborWeight;
+
+          if (!weights.contains(neighborID) || newWeight < weights[neighborID]) {
+
+            weights[neighborID] = newWeight;
+
+            frontier.push(make_pair(newWeight, neighborID));
+
+            parents[neighborID] = currentID;
+
+          }
+
+        }
+
+      }
+
       // YOUR CODE HERE
       // NOTE: You must use the constructs defined at
       // the beginning of this method in your code.
