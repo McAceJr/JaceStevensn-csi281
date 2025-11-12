@@ -4,16 +4,51 @@ Jace Stevenson
 
 
 2. How is a minimum-spanning-tree different from a solution to The Traveling Salesman problem?
+The TSP (traveling salesman problem) is a loop while mst is a tree
 
+3. Rewrite 5 vertices from the weighted graph cityGraph2 from test.cpp in adjacency matrix form.
+You can enter a text table yourself in your answers file,
+or copy and paste a text table from https://www.tablesgenerator.com/text_tables or add an additional image/spreadsheet
+file to your repository or put a link in question 3 to a Google Sheet. It's your call.
+Seattle->Chicago
+Chicago->Detroit
+Detroit->Washington
+San Francisco->Los Angeles
+Los Angeles->Riverside
+A. Seattle
+B. Chicago
+C. Detroit
+D. Washington
+E. San Francisco
+F. Los Angeles
+G. Riverside
 
-3. Rewrite 5 vertices from the weighted graph cityGraph2 from test.cpp in adjacency matrix form. You can enter a text table yourself in your answers file, or copy and paste a text table from https://www.tablesgenerator.com/text_tables or add an additional image/spreadsheet file to your repository or put a link in question 3 to a Google Sheet. It's your call.
+y axis - to
+x axis - from
 
+  A B C D E F G
+A 0 1 0 0 0 0 0
+B 0 0 1 0 0 0 0
+C 0 0 0 1 0 0 0
+D 0 0 0 0 1 0 0
+E 0 0 0 0 0 1 0
+F 0 0 0 0 0 0 1
+G 0 0 0 0 0 0 0
 
-4. What is the Big-O time complexity of Jarnik's algorithm when a priority queue (binary heap) is used? What about when it is not used? Why is there a difference?
-
+4. What is the Big-O time complexity of Jarnik's algorithm when a priority queue (binary heap) is used? What about when it is not used?Why is there a difference?
+According to https://medium.com/@yankuan/time-complexity-of-creating-a-heap-or-priority-queue-fd23bcaefb83
+Creating an empty heap / priority queue takes O(n * log n ) which is the difference between when it is used and not used.
 
 5. Why is Jarnik's algorithm a greedy algorithm?
+Because it makes locally optimal decision in hope that the decision is globally optimal.
+For jarnik it is locally optimal shortest paths that will hopefully become optimal shortest paths.
 
+6. Jarnik's algorithm is commonly known as Prim's algorithm, even though Jarnik discovered it and published it decades before Prim rediscovered it.
+Research another algorithm that has a different common name from its original discoverer. What is the purpose of the algorithm and why did its original
+creator not get credit?
+Boruvka's Algorithm https://en.wikipedia.org/wiki/Bor%C5%AFvka's_algorithm
 
-6. Jarnik's algorithm is commonly known as Prim's algorithm, even though Jarnik discovered it and published it decades before Prim rediscovered it. Research another algorithm that has a different common name from its original discoverer. What is the purpose of the algorithm and why did its original creator not get credit?
-
+Boruvka originally created the algorithm but it went through 7 rediscoveries eventually now being called
+Sollin's algorithm being rediscovered most recently by Georges Sollin in 1965. The algorithm is used to find minimum spanning trees like jarniks
+but it does it in a different way. From what was written It seems to be decently similar although there is no visit function, and it also
+assumes there are no repeated weights otherwise an extra function must be created.
